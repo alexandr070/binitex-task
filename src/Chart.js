@@ -18,7 +18,7 @@ class Chart extends Component {
       data: [
         {
           type: "line",
-          xValueFormatString: "MMM YYYY",
+          xValueFormatString: "DD MMM YYYY",
           yValueFormatString: "#,##0.00",
           dataPoints: dataPoints,
         },
