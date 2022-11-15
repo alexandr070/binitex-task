@@ -270,9 +270,9 @@ class Chart extends Component {
     );
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     var chart = this.chart;
-    var country = this.state.country;
+    const country = this.state.country;
     fetch("https://opendata.ecdc.europa.eu/covid19/casedistribution/json")
       .then((resp) => resp.json())
       .then((data) => data.records)
@@ -291,6 +291,7 @@ class Chart extends Component {
           }
         }
         chart.render();
+        dataPoints = [];
       });
   }
 }
