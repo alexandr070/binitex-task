@@ -29,6 +29,8 @@ const App = () => {
     browserDatePicker: true,
   };
 
+  const [visibleTable, setVisibleTable] = useState(true);
+  const [visibleChart, setVisibleChart] = useState(false);
   const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
   const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
   const [rowData, setRowData] = useState();
@@ -69,23 +71,39 @@ const App = () => {
       .then((data) => setRowData(data.records));
   }, []);
 
+  const tableHandler = () => {
+    setVisibleTable(true);
+    setVisibleChart(false);
+  };
+
+  const chartHandler = () => {
+    setVisibleTable(false);
+    setVisibleChart(true);
+  };
+
   return (
     <>
-      <div style={containerStyle}>
-        <div style={gridStyle} className="ag-theme-alpine">
-          <AgGridReact
-            rowData={rowData}
-            columnDefs={columnDefs}
-            defaultColDef={defaultColDef}
-            autoGroupColumnDef={autoGroupColumnDef}
-            animateRows={true}
-            onGridReady={onGridReady}
-            pagination={true}
-            paginationPageSize={20}
-          ></AgGridReact>
-          <Chart />
-        </div>
+      <div>
+        <button onClick={tableHandler}>Table</button>
+        <button onClick={chartHandler}>Chart</button>
       </div>
+      {visibleTable && (
+        <div style={containerStyle}>
+          <div style={gridStyle} className="ag-theme-alpine">
+            <AgGridReact
+              rowData={rowData}
+              columnDefs={columnDefs}
+              defaultColDef={defaultColDef}
+              autoGroupColumnDef={autoGroupColumnDef}
+              animateRows={true}
+              onGridReady={onGridReady}
+              pagination={true}
+              paginationPageSize={20}
+            ></AgGridReact>
+          </div>
+        </div>
+      )}
+      {visibleChart && <Chart />}
     </>
   );
 };
