@@ -103,7 +103,7 @@ const App = () => {
           </div>
         </div>
       )}
-      {visibleChart && <Chart />}
+      {!visibleChart && <Chart />}
     </>
   );
 };

@@ -5,6 +5,18 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 var dataPoints = [];
 class Chart extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      country: "Afghanistan",
+    };
+    this.setCountry = this.setCountry.bind(this);
+  }
+
+  setCountry(event) {
+    this.setState({ country: event.target.value });
+  }
+
   render() {
     const options = {
       theme: "light2",
@@ -19,7 +31,7 @@ class Chart extends Component {
         {
           type: "line",
           xValueFormatString: "DD MMM YYYY",
-          yValueFormatString: "#",
+          yValueFormatString: "##",
           dataPoints: dataPoints,
         },
       ],
@@ -243,17 +255,15 @@ class Chart extends Component {
       "Zimbabwe",
     ];
 
-    const Countries = (data) => {};
-
     return (
       <div>
         <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
         <div>
-          <select>
+          <select onChange={this.setCountry}>
             <option selected="selected">Afghanistan</option>
-            {countryList.forEach((element) => {
-              return <option>{element}</option>;
-            })}
+            {countryList.map((x, y) => (
+              <option key={y}>{x}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -262,12 +272,13 @@ class Chart extends Component {
 
   componentDidMount() {
     var chart = this.chart;
+    var country = this.state.country;
     fetch("https://opendata.ecdc.europa.eu/covid19/casedistribution/json")
       .then((resp) => resp.json())
       .then((data) => data.records)
       .then(function (data) {
         for (var i = 0; i < data.length; i++) {
-          if (data[i].countriesAndTerritories == "Afghanistan") {
+          if (data[i].countriesAndTerritories == country) {
             var dateParts = data[i].dateRep.split("/");
             dataPoints.push({
               x: new Date(
