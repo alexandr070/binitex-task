@@ -1,15 +1,9 @@
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-  Component,
-} from "react";
-import { render } from "react-dom";
+import React, { useCallback, useMemo, useState } from "react";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-enterprise";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import Chart from "./Chart.js";
 
 const App = () => {
   var filterParams = {
@@ -89,6 +83,7 @@ const App = () => {
             pagination={true}
             paginationPageSize={20}
           ></AgGridReact>
+          <Chart />
         </div>
       </div>
     </>
