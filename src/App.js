@@ -57,6 +57,7 @@ const App = () => {
       minWidth: 100,
       resizable: true,
       filter: true,
+      sortable: true,
     };
   }, []);
   const autoGroupColumnDef = useMemo(() => {
