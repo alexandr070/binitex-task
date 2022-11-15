@@ -38,6 +38,7 @@ class Chart extends Component {
     };
 
     const countryList = [
+      "Afghanistan",
       "Albania",
       "Algeria",
       "Andorra",
@@ -260,7 +261,7 @@ class Chart extends Component {
         <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
         <div>
           <select onChange={this.setCountry}>
-            <option selected="selected">Afghanistan</option>
+            <option selected="selected">Select Country</option>
             {countryList.map((x, y) => (
               <option key={y}>{x}</option>
             ))}
